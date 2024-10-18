@@ -12,7 +12,7 @@ const parseExams = (html: string) => {
         const title = $(element).find("h2.entry-title").text().trim();
         const link = $(element).find("div.entry-content a").attr("href");
         if (title && link) {
-            exams.push({ title, url: `https://exams.engsoc.uwaterloo.ca/?tag=electrical-and-computer/${link}` });
+            exams.push({ title, url: `https://exams.engsoc.uwaterloo.ca/${link}` });
         }
     });
 
