@@ -37,7 +37,7 @@ const fetchPage = async (page: number) => {
 const processPages = async () => {
     const allExams: { title: string; url: string }[] = [];
     //78
-    for (let page = 0; page <= 78; page++) {
+    for (let page = 0; page <= 1; page++) {
         console.log(`Fetching page ${page}...`);
         const html = await fetchPage(page);
         const exams = parseExams(html);
