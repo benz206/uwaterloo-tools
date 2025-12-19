@@ -130,3 +130,6 @@ dist
 .pnp.*
 
 *.xlsx
+
+out.jsonl
+out.csv
