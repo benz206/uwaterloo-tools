@@ -1,6 +1,10 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
 import * as xlsx from "xlsx";
+import dotenv from "dotenv";
+
+// Config with env local
+dotenv.config({ path: ".env.local" });
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -48,23 +52,27 @@ const fetchPage = async (page: number, category: string) => {
         },
     });
 
+    console.log(response.data);
+
     return response.data;
 };
 
 const processPages = async () => {
     const allExams: { title: string; url: string; category: string }[] = [];
     
-    // Process ECE exams (0-78 pages)
-    for (let page = 0; page <= 78; page++) {
-        console.log(`Fetching ECE page ${page}...`);
+    // Process ECE exams (0-80 pages)
+    for (let page = 0; page <= 80; page++) {
+    // for (let page = 0; page <= 1; page++) {
+    console.log(`Fetching ECE page ${page}...`);
         const html = await fetchPage(page, "ECE");
         const exams = parseExams(html, "ECE");
         allExams.push(...exams);
         await delay(1000);
     }
 
-    // Process Mathematics exams (0-19 pages)
-    for (let page = 0; page <= 19; page++) {
+    // Process Mathematics exams (0-20 pages)
+    for (let page = 0; page <= 20; page++) {
+    // for (let page = 0; page <= 1; page++) {
         console.log(`Fetching Mathematics page ${page}...`);
         const html = await fetchPage(page, "Mathematics");
         const exams = parseExams(html, "Mathematics");
@@ -74,6 +82,7 @@ const processPages = async () => {
 
     // Process Math exams (0-5 pages)
     for (let page = 0; page <= 5; page++) {
+    // for (let page = 0; page <= 1; page++) {
         console.log(`Fetching Math page ${page}...`);
         const html = await fetchPage(page, "Math");
         const exams = parseExams(html, "Math");
